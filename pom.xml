@@ -49,7 +49,7 @@
                 <version>1.4.3</version>
                 <configuration>
                     <!-- replace `bonifacekabaso` with your docker id-->
-                    <repository>bonifacekabaso/javanosqltest</repository>
+                    <repository>waldonhendricks/javanosqltest</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
