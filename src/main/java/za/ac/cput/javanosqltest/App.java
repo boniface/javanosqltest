@@ -6,10 +6,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import za.ac.cput.javanosqltest.domain.Result;
+import za.ac.cput.javanosqltest.services.redis.Impl.RedisServiceImpl;
+import za.ac.cput.javanosqltest.services.redis.RedisService;
 
 @SpringBootApplication
 @RestController
-public class JavanosqltestApplication {
+public class App {
+    private RedisService redisService;
 
     @RequestMapping("/")
     public String home() {
@@ -84,10 +88,33 @@ public class JavanosqltestApplication {
 
 //Redis CRUD
 
-    @RequestMapping(value="/java/redis/delete/{number}", method=RequestMethod.GET)
-    public String deleteRedis(@PathVariable Long number) {
-        return "You are asking me to delete "+number+" objects ";
+    @RequestMapping(value="/redis/create/{number}", method=RequestMethod.GET)
+    public Result redisCreate(@PathVariable Long number) {
+       redisService = new RedisServiceImpl();
+       return redisService.create(number);
     }
+
+    @RequestMapping(value="/redis/read", method=RequestMethod.GET)
+    public Result redisRead() {
+        redisService = new RedisServiceImpl();
+        return redisService.read();
+    }
+
+    @RequestMapping(value="/redis/update/", method=RequestMethod.GET)
+    public Result redisUpdate() {
+        redisService = new RedisServiceImpl();
+        return redisService.update();
+    }
+
+    @RequestMapping(value="/redis/delete", method=RequestMethod.GET)
+    public Result redisDelete() {
+        redisService = new RedisServiceImpl();
+        return redisService.delete();
+    }
+
+
+
+
 
 //Mongo CRUD
 
@@ -104,6 +131,6 @@ public class JavanosqltestApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(JavanosqltestApplication.class, args);
+        SpringApplication.run(App.class, args);
     }
 }
