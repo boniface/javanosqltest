@@ -13,13 +13,13 @@ public class RedisRepository implements Repository {
 
    public  JedisCluster getCluaster(){
        Set<HostAndPort> jedisClusterNode = new HashSet<HostAndPort>();
-       jedisClusterNode.add(new HostAndPort("10.47.2.169", 17582));
+       jedisClusterNode.add(new HostAndPort("redis.r8s.svc.cluster.local", 7379));
        return  new JedisCluster(jedisClusterNode);
    }
 
     @Override
     public Person  create(Person person) {
-        person.setId(UUID.randomUUID().toString());
+        person.setId(UUID.fromString(new SecureRandom().toString()).toString());
         getCluaster().set(person.getId(),person.getName());
         return person;
 

@@ -4,13 +4,13 @@ import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.domain.Result;
 import za.ac.cput.javanosqltest.repository.Repository;
 import za.ac.cput.javanosqltest.repository.redis.RedisRepository;
-import za.ac.cput.javanosqltest.services.redis.RedisService;
+import za.ac.cput.javanosqltest.services.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class RedisServiceImpl implements RedisService {
+public class RedisServiceImpl implements Service {
     private Repository repository= new RedisRepository();
 
     @Override

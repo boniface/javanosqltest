@@ -1,8 +1,8 @@
-package za.ac.cput.javanosqltest.services.redis;
+package za.ac.cput.javanosqltest.services;
 
 import za.ac.cput.javanosqltest.domain.Result;
 
-public interface RedisService {
+public interface Service {
     Result create(Long number);
     Result read();
     Result update();

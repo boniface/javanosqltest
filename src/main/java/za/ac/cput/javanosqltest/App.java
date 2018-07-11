@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import za.ac.cput.javanosqltest.domain.Result;
 import za.ac.cput.javanosqltest.services.redis.Impl.RedisServiceImpl;
-import za.ac.cput.javanosqltest.services.redis.RedisService;
+import za.ac.cput.javanosqltest.services.Service;
 
 @SpringBootApplication
 @RestController
 public class App {
-    private RedisService redisService;
+    private Service service;
 
     @RequestMapping("/")
     public String home() {
@@ -90,26 +90,26 @@ public class App {
 
     @RequestMapping(value="/redis/create/{number}", method=RequestMethod.GET)
     public Result redisCreate(@PathVariable Long number) {
-       redisService = new RedisServiceImpl();
-       return redisService.create(number);
+       service = new RedisServiceImpl();
+       return service.create(number);
     }
 
     @RequestMapping(value="/redis/read", method=RequestMethod.GET)
     public Result redisRead() {
-        redisService = new RedisServiceImpl();
-        return redisService.read();
+        service = new RedisServiceImpl();
+        return service.read();
     }
 
-    @RequestMapping(value="/redis/update/", method=RequestMethod.GET)
+    @RequestMapping(value="/redis/update", method=RequestMethod.GET)
     public Result redisUpdate() {
-        redisService = new RedisServiceImpl();
-        return redisService.update();
+        service = new RedisServiceImpl();
+        return service.update();
     }
 
     @RequestMapping(value="/redis/delete", method=RequestMethod.GET)
     public Result redisDelete() {
-        redisService = new RedisServiceImpl();
-        return redisService.delete();
+        service = new RedisServiceImpl();
+        return service.delete();
     }
 
 
