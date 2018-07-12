@@ -1,25 +1,22 @@
-package za.ac.cput.javanosqltest.services.redis.Impl;
+package za.ac.cput.javanosqltest.services.Impl;
 
-import redis.clients.jedis.Jedis;
+import com.mongodb.client.MongoCollection;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.domain.Result;
 import za.ac.cput.javanosqltest.repository.Repository;
-import za.ac.cput.javanosqltest.repository.redis.RedisRepository;
+import za.ac.cput.javanosqltest.repository.mongo.MongoRepository;
 import za.ac.cput.javanosqltest.services.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class RedisServiceImpl implements Service {
-    private Repository repository = new RedisRepository() {
-        @Override
-        public Jedis getConnection() {
-            return super.getConnection();
-        }
+public class MongoServiceImpl implements Service {
+    private Repository repository = new MongoRepository(repository) {
+        private MongoCollection<Person> collection;
     };
 
-    public RedisServiceImpl() {
+    public MongoServiceImpl() {
     }
 
     @Override

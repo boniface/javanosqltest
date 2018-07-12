@@ -1,26 +1,28 @@
 package za.ac.cput.javanosqltest.repository.redis;
 
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.Jedis;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.repository.Repository;
 
-import java.security.SecureRandom;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class RedisRepository implements Repository {
 
 
-   public  JedisCluster getCluaster(){
-       Set<HostAndPort> jedisClusterNode = new HashSet<HostAndPort>();
-       jedisClusterNode.add(new HostAndPort("redis.r8s.svc.cluster.local", 7379));
-       return  new JedisCluster(jedisClusterNode);
-   }
+    public  Jedis getConnection(){
+
+        Jedis jedis = new Jedis("redis.r8s.svc.cluster.local");
+
+        return  jedis;
+    }
 
     @Override
-    public Person  create(Person person) {
-        person.setId(UUID.fromString(new SecureRandom().toString()).toString());
-        getCluaster().set(person.getId(),person.getName());
+    public Person create(Person person) {
+        person.setId(UUID.randomUUID().toString());
+        getConnection().set(person.getId(),person.getName());
         return person;
 
     }
@@ -28,36 +30,36 @@ public class RedisRepository implements Repository {
     @Override
     public Person update(Person person) {
         person.setName(person.getName());
-        getCluaster().set(person.getId(),person.getName());
-        getCluaster().set(person.getId(),person.getName());
+        getConnection().set(person.getId(),person.getName());
+        getConnection().set(person.getId(),person.getName());
         return person;
 
     }
 
     @Override
     public boolean delete(Person person) {
-        getCluaster().del(person.getId());
-        String id = getCluaster().get(person.getId());
+        getConnection().del(person.getId());
+        String id = getConnection().get(person.getId());
         return id == null;
     }
 
     @Override
     public Person read(String  id) {
-       String name = getCluaster().get(id);
-       Person person = new Person();
-       person.setId(id);
-       person.setName(name);
-       return person;
+        String name = getConnection().get(id);
+        Person person = new Person();
+        person.setId(id);
+        person.setName(name);
+        return person;
     }
 
     @Override
     public List<Person> readAll() {
-       List<Person> persons = new ArrayList<>();
-       Set<String> results = getCluaster().hkeys("*");
-        for (String result : results) {
+        List<Person> persons = new ArrayList<>();
+        Set<String> keys = getConnection().keys("*");
+        for (String key : keys) {
             Person person = new Person();
-            person.setId(result);
-            person.setName(getCluaster().get(result));
+            person.setId(key);
+            person.setName(getConnection().get(key));
             persons.add(person);
         }
         return persons;

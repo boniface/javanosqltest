@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import za.ac.cput.javanosqltest.domain.Result;
+import za.ac.cput.javanosqltest.services.Impl.MongoServiceImpl;
 import za.ac.cput.javanosqltest.services.redis.Impl.RedisServiceImpl;
 import za.ac.cput.javanosqltest.services.Service;
 
@@ -18,71 +19,6 @@ public class App {
     @RequestMapping("/")
     public String home() {
         return "Docker Issues now Fixed See Readme file ";
-    }
-
-    // HTTP method ReadOperation
-
-    //Cassandra CRUD
-
-    @RequestMapping(value="/java/cassandra/read/{number}", method=RequestMethod.GET)
-    public String getCassandra(@PathVariable Long number) { return "You are asking me to read "+number+" objects ";
-    }
-
-
-//Redis CRUD
-
-    @RequestMapping(value="/java/redis/read/{number}", method=RequestMethod.GET)
-    public String getRedis(@PathVariable Long number) { return "You are asking me to read "+number+" objects ";
-    }
-
-//Mongo CRUD
-
-    @RequestMapping(value="/java/mongo/read/{number}", method=RequestMethod.GET)
-    public String getMongo(@PathVariable Long number) { return "You are asking me to read "+number+" objects ";
-    }
-
-//Dgraph CRUD
-
-    @RequestMapping(value="/java/dgraph/read/{number}", method=RequestMethod.GET)
-    public String getDgraphR(@PathVariable Long number) { return "You are asking me to read "+number+" objects ";
-    }
-
-
-//HTTP method WriteOperation
-
-    //Cassandra CRUD
-
-    @RequestMapping(value="/java/cassandra/write/{number}", method=RequestMethod.GET)
-    public String postCassandra(@PathVariable Long number) { return "You are asking me to write "+number+" objects ";
-    }
-
-
-//Redis CRUD
-
-    @RequestMapping(value="/java/redis/write/{number}", method=RequestMethod.GET)
-    public String postRedis(@PathVariable Long number) {
-        return "You are asking me to write "+number+" objects ";
-    }
-
-//Mongo CRUD
-
-    @RequestMapping(value="/java/mongo/write/{number}", method=RequestMethod.GET)
-    public String postMongo(@PathVariable Long number) { return "You are asking me to write "+number+" objects ";
-    }
-
-
-    //Dgraph CRUD
-    @RequestMapping(value="/java/dgraph/write/{number}", method=RequestMethod.GET)
-    public String postDgraph(@PathVariable Long number) {
-        return "You are asking me to write "+number+" objects ";
-    }
-
-//HTTP method DeleteOperation
-
-    //Cassandra CRUD
-
-    @RequestMapping (value="/java/cassandra/delete/{number}", method=RequestMethod.GET)
-    public String deleteCassandra(@PathVariable Long number) { return "You are asking me to delete "+number+" objects ";
     }
 
 
@@ -112,21 +48,30 @@ public class App {
         return service.delete();
     }
 
-
-
-
-
 //Mongo CRUD
 
-    @RequestMapping(value="/java/mongo/delete/{number}", method=RequestMethod.GET)
-    public String deleteMongo(@PathVariable Long number) { return "You are asking me to delete "+number+" objects ";
+    @RequestMapping(value="/mongo/create/{number}", method=RequestMethod.GET)
+    public Result mongoCreate(@PathVariable Long number) {
+        service = new MongoServiceImpl();
+        return service.create(number);
     }
 
+    @RequestMapping(value="/mongo/read", method=RequestMethod.GET)
+    public Result mongoRead() {
+        service = new MongoServiceImpl();
+        return service.read();
+    }
 
-    //Dgraph CRUD
-    @RequestMapping(value="/java/dgraph/delete/{number}", method=RequestMethod.GET)
-    public String deleteDgraph(@PathVariable Long number) {
-        return "You are asking me to delete "+number+" objects ";
+    @RequestMapping(value="/mongo/update", method=RequestMethod.GET)
+    public Result mongoUpdate() {
+        service = new MongoServiceImpl();
+        return service.update();
+    }
+
+    @RequestMapping(value="/mongo/delete", method=RequestMethod.GET)
+    public Result mongoDelete() {
+        service = new MongoServiceImpl();
+        return service.delete();
     }
 
 
