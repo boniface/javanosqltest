@@ -12,15 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class RedisServiceImpl implements Service {
-    private Repository repository = new RedisRepository() {
-        @Override
-        public Jedis getConnection() {
-            return super.getConnection();
-        }
-    };
-
-    public RedisServiceImpl() {
-    }
+    private Repository repository= new RedisRepository();
 
     @Override
     public Result create(Long number) {
@@ -38,7 +30,7 @@ public class RedisServiceImpl implements Service {
             Person created = repository.create(person);
             if(created.getId()!=null)
                 count++;
-                result.setObjects(count);
+            result.setObjects(count);
         }
 
 

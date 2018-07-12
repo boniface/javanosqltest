@@ -10,17 +10,6 @@ import java.util.List;
 
 public class MongoRepository implements Repository {
 
-
-    private MongoCollection<Person> collection;
-
-    public MongoRepository(MongoCollection<Person> collection) {
-        this.collection = collection;
-    }
-
-    public MongoRepository(Repository repository) {
-
-    }
-
     public static void main(String[] args) {
 
         MongoClient mongoClient = new MongoClient("10.47.3.5", 22005);
@@ -31,23 +20,15 @@ public class MongoRepository implements Repository {
 
             MongoCollection<Document> collection = db.getCollection("person");
 
-        long startTime = System.currentTimeMillis();
-
-        long endTime = System.currentTimeMillis();
-        long diff = endTime - startTime;
-        System.out.println("Total time (in mill seconds) : " + (diff));
-
     }
 
     @Override
     public Person create(Person person) {
-        Document user = new Document("Id",11)
-                .append("name","Anderson");
-
-        collection.insertOne(person);
-
+        Document user = new Document("Id", 11)
+                .append("name", "Anderson");
         return person;
     }
+
 
     @Override
     public Person update(Person person) {
