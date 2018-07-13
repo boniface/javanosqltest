@@ -12,15 +12,15 @@ import java.util.UUID;
 public class RedisRepository implements Repository {
 
 
-   public  Jedis getConnection(){
+    public  Jedis getConnection(){
 
-       Jedis jedis = new Jedis("redis.r8s.svc.cluster.local");
+        Jedis jedis = new Jedis("redis.r8s.svc.cluster.local");
 
-       return  jedis;
-   }
+        return  jedis;
+    }
 
     @Override
-    public Person  create(Person person) {
+    public Person create(Person person) {
         person.setId(UUID.randomUUID().toString());
         getConnection().set(person.getId(),person.getName());
         return person;
@@ -45,17 +45,17 @@ public class RedisRepository implements Repository {
 
     @Override
     public Person read(String  id) {
-       String name = getConnection().get(id);
-       Person person = new Person();
-       person.setId(id);
-       person.setName(name);
-       return person;
+        String name = getConnection().get(id);
+        Person person = new Person();
+        person.setId(id);
+        person.setName(name);
+        return person;
     }
 
     @Override
     public List<Person> readAll() {
-       List<Person> persons = new ArrayList<>();
-       Set<String> keys = getConnection().keys("*");
+        List<Person> persons = new ArrayList<>();
+        Set<String> keys = getConnection().keys("*");
         for (String key : keys) {
             Person person = new Person();
             person.setId(key);

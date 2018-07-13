@@ -1,5 +1,6 @@
 package za.ac.cput.javanosqltest.services.redis.Impl;
 
+import redis.clients.jedis.Jedis;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.domain.Result;
 import za.ac.cput.javanosqltest.repository.Repository;
@@ -29,7 +30,7 @@ public class RedisServiceImpl implements Service {
             Person created = repository.create(person);
             if(created.getId()!=null)
                 count++;
-                result.setObjects(count);
+            result.setObjects(count);
         }
 
 
