@@ -1,42 +1,39 @@
 package za.ac.cput.javanosqltest.repository.mongo;
+
+import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.repository.Repository;
-import com.mongodb.*;
-import com.mongodb.client.MongoDatabase;
 
 import java.util.List;
 
+import static com.mongodb.client.model.Filters.eq;
+
 public class MongoRepository implements Repository {
 
-    public static void main(String[] args) {
-
-        MongoClient mongoClient = new MongoClient("10.47.3.5", 22005);
-
-        //    MongoClient client = new MongoClient("localhost",27017);
-
-            MongoDatabase db = mongoClient.getDatabase("users");
-
-            MongoCollection<Document> collection = db.getCollection("person");
-
+    public MongoCollection<Document> getConnection() {
+        MongoClient client = new MongoClient("localhost", 22005);
+        return client.getDatabase("users").getCollection("person");
     }
 
     @Override
     public Person create(Person person) {
-        Document user = new Document("Id", 11)
-                .append("name", "Anderson");
+        Document doc = new Document("_id", person.getId()).append("name", person.getName());
+        getConnection().insertOne(doc);
         return person;
     }
 
 
     @Override
     public Person update(Person person) {
-        return null;
+        getConnection().updateOne(eq("_id", person.getId()), new Document("$set", new Document("name", person.getName())));
+        return person;
     }
 
     @Override
     public boolean delete(Person person) {
+        getConnection().deleteOne(eq("_id", person.getId()));
         return false;
     }
 
