@@ -2,6 +2,7 @@ package za.ac.cput.javanosqltest.services.mongo.Impl;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.domain.Result;
@@ -10,8 +11,8 @@ import za.ac.cput.javanosqltest.repository.Repository;
 import za.ac.cput.javanosqltest.repository.mongo.MongoRepository;
 import za.ac.cput.javanosqltest.services.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.sql.Timestamp.valueOf;
@@ -20,17 +21,22 @@ import static java.sql.Timestamp.valueOf;
 public class MongoServiceImpl implements Service {
 
 
-    MongoClient client = new MongoClient("localhost", 27017);
+    MongoClient mongoClient = new MongoClient("localhost", 27017);
+    MongoDatabase database = mongoClient.getDatabase("users");
 
+    public Repository repository= new MongoRepository();
 
-    private Repository repository= new MongoRepository();
-
-    private MongoCollection<Document> collection;
+    public MongoCollection<Document> collection;
 
     @Override
     public Result create(Long number) {
 
+        MongoClient client = new MongoClient("localhost", 27017);
+        client.getDatabase("users");
+
+        List<MongoDatabase> writes = new ArrayList<>();
         Result result = new Result();
+
         LocalDateTime timeStamp = LocalDateTime.now();
         result.setStart(timeStamp);
         long start = valueOf(timeStamp).getTime();
@@ -40,6 +46,7 @@ public class MongoServiceImpl implements Service {
             Person person = new Person();
             long startTime = System.currentTimeMillis();
             collection.insertOne(new Document().append("name", person.getName()));
+            writes.add(database);
             System.out.println("Inserted Document ");
             long endTime = System.currentTimeMillis();
             long diff = endTime - startTime;
@@ -54,7 +61,7 @@ public class MongoServiceImpl implements Service {
         return result;
     }
 
-
+//Read works
     @Override
     public Result read() {
 

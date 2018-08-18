@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class Result implements Serializable {
     private LocalDateTime start;
     private LocalDateTime end;
-    private long duration;
+    private Long duration;
     private Long objects;
 
     public LocalDateTime getStart() {
