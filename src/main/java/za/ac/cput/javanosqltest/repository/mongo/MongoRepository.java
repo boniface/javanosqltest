@@ -6,6 +6,7 @@ import org.bson.Document;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.repository.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -39,12 +40,24 @@ public class MongoRepository implements Repository {
 
     @Override
     public Person read(String id) {
-        return null;
+        Document document =  getConnection().find(eq("i", 71)).first();
+        Person person = new Person();
+        person.setId(document.getString("_id"));
+        person.setName(document.getString("name"));
+        return person;
     }
 
     @Override
     public List<Person> readAll() {
-        return null;
+        List<Person> personList = new ArrayList<>();
+        for (Document document : getConnection().find()) {
+            Person person = new Person();
+            person.setId(document.getString("_id"));
+            person.setName(document.getString("name"));
+            personList.add(person);
+
+        }
+        return personList;
     }
 
 
