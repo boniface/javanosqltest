@@ -43,7 +43,7 @@ public class MongoRepository implements Repository {
 
     @Override
     public Person read(String id) {
-        Document document =  getConnection().find(eq("i", 71)).first();
+        Document document =  getConnection().find(eq("_id", id)).first();
         Person person = new Person();
         person.setId(document.getString("_id"));
         person.setName(document.getString("name"));
