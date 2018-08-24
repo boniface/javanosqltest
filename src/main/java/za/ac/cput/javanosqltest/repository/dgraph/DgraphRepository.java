@@ -1,11 +1,19 @@
 package za.ac.cput.javanosqltest.repository.dgraph;
 
+
+import io.dgraph.DgraphGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.repository.Repository;
 
 import java.util.List;
 
 public class DgraphRepository implements Repository {
+    ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9080).usePlaintext(true).build();
+    DgraphGrpc.DgraphStub stub = DgraphGrpc.newStub(channel);
+
+
     @Override
     public Person create(Person person) {
         return null;
