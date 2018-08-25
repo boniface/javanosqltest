@@ -14,7 +14,7 @@ public class RedisRepository implements Repository {
 
     public  Jedis getConnection(){
 
-        Jedis jedis = new Jedis("redis.r8s.svc.cluster.local");
+        Jedis jedis = new Jedis();
 
         return  jedis;
     }
