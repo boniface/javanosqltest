@@ -5,7 +5,7 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
 public class MongoConnection {
-    public static MongoConnection connection = null;
+    private static MongoConnection connection = null;
 
     public MongoCollection<Document> getCollection() {
         return collection;
