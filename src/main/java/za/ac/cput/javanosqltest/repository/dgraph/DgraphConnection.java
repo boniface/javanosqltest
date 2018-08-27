@@ -12,6 +12,7 @@ import java.util.List;
 public class DgraphConnection {
 
     private DgraphClient client;
+
     private static DgraphConnection connection = null;
 
     private DgraphConnection() {
@@ -34,5 +35,7 @@ public class DgraphConnection {
         return connection;
     }
 
-
+    public DgraphClient getClient() {
+        return client;
+    }
 }
