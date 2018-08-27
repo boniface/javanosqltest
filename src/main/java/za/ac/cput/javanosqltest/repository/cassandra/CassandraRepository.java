@@ -1,10 +1,7 @@
 package za.ac.cput.javanosqltest.repository.cassandra;
 
 
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
-import com.datastax.driver.core.Session;
+import com.datastax.driver.core.*;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.repository.Repository;
 
@@ -16,6 +13,7 @@ public class CassandraRepository implements Repository {
             .builder()
             .addContactPoint("127.0.0.1")
             .build();
+
     final Session session = cluster.connect("users");
     @Override
     public Person create(Person person) {
