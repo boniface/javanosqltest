@@ -49,8 +49,11 @@ public class DgraphRepository implements Repository {
             String json = gson.toJson(person);
 
             // Run mutation
-            DgraphProto.Mutation mu =
-                    DgraphProto.Mutation.newBuilder().setSetJson(ByteString.copyFromUtf8(json.toString())).build();
+            DgraphProto.Mutation mu = DgraphProto
+                    .Mutation
+                    .newBuilder()
+                    .setSetJson(ByteString.copyFromUtf8(json))
+                    .build();
             txn.mutate(mu);
             txn.commit();
 
