@@ -31,7 +31,6 @@ public class RedisRepository implements Repository {
     public Person update(Person person) {
         person.setName(person.getName());
         getConnection().set(person.getId(),person.getName());
-        getConnection().set(person.getId(),person.getName());
         return person;
 
     }
