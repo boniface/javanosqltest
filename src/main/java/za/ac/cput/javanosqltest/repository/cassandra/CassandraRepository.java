@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CassandraRepository implements Repository {
+
     final Cluster cluster = Cluster
             .builder()
             .addContactPoint("127.0.0.1")
