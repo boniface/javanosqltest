@@ -95,7 +95,6 @@ public class DgraphServiceImpl implements Service {
         long start = valueOf(timeStamp).getTime();
 
         List<Person> persons = repository.readAll();
-
         for (Person person : persons) {
             boolean isDeleted = repository.delete(person);
             if(isDeleted)
