@@ -1,27 +1,66 @@
 package za.ac.cput.javanosqltest.repository.dgraph;
 
 
-import io.dgraph.DgraphGrpc;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import com.google.gson.Gson;
+import com.google.protobuf.ByteString;
+import io.dgraph.DgraphClient;
+import io.dgraph.DgraphProto;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.repository.Repository;
 
 import java.util.List;
 
 public class DgraphRepository implements Repository {
-    ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9080).usePlaintext(true).build();
-    DgraphGrpc.DgraphStub stub = DgraphGrpc.newStub(channel);
+
+    DgraphClient client = DgraphConnection.getInstance().getClient();
 
 
     @Override
     public Person create(Person person) {
-        return null;
+        Gson gson = new Gson(); // For JSON encode/decode
+
+        DgraphClient.Transaction txn = client.newTransaction();
+        try {
+
+            // Serialize it
+            String json = gson.toJson(person);
+
+            // Run mutation
+            DgraphProto.Mutation mu =
+                    DgraphProto.Mutation.newBuilder().setSetJson(ByteString.copyFromUtf8(json.toString())).build();
+            txn.mutate(mu);
+            txn.commit();
+
+        } finally {
+            txn.discard();
+        }
+
+        return person;
     }
 
     @Override
     public Person update(Person person) {
-        return null;
+        Gson gson = new Gson(); // For JSON encode/decode
+
+        DgraphClient.Transaction txn = client.newTransaction();
+        try {
+            person.setName(person+ " Updated ");
+            // Serialize it
+            String json = gson.toJson(person);
+
+            // Run mutation
+            DgraphProto.Mutation mu = DgraphProto
+                    .Mutation
+                    .newBuilder()
+                    .setSetJson(ByteString.copyFromUtf8(json))
+                    .build();
+            txn.mutate(mu);
+            txn.commit();
+
+        } finally {
+            txn.discard();
+        }
+        return person;
     }
 
     @Override

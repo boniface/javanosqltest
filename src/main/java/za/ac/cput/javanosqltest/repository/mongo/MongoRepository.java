@@ -15,7 +15,7 @@ import static com.mongodb.client.model.Filters.eq;
 public class MongoRepository implements Repository {
 
 
-    public MongoCollection<Document> getConnection() {
+    private MongoCollection<Document> getConnection() {
         MongoClient client = new MongoClient("localhost", 27017);
         return client.getDatabase("users").getCollection("person");
 
