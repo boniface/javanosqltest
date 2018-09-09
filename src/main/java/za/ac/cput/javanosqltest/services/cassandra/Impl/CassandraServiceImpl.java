@@ -1,4 +1,4 @@
-package za.ac.cput.javanosqltest.services.cassandra;
+package za.ac.cput.javanosqltest.services.cassandra.Impl;
 
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.domain.Result;
