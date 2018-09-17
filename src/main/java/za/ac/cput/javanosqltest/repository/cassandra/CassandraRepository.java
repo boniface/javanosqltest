@@ -1,7 +1,10 @@
 package za.ac.cput.javanosqltest.repository.cassandra;
 
 
-import com.datastax.driver.core.*;
+import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.Row;
+import com.datastax.driver.core.Session;
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.repository.Repository;
 
@@ -12,31 +15,30 @@ public class CassandraRepository implements Repository {
 
     final Cluster cluster = Cluster
             .builder()
-            .addContactPoint("127.0.0.1")
+            .addContactPoint("172.17.0.2")
             .build();
-
-    final Session session = cluster.connect("users");
+    final Session session = cluster.connect("nosqltests");
     @Override
     public Person create(Person person) {
-        session.execute("INSERT INTO persons (id, name) VALUES ("+ person.getId()+ ","+person.getName()+")");
+        session.execute("  INSERT INTO persons (id, name) VALUES ( '"+ person.getId()+ "', '"+person.getName()+" ')  ");
         return person;
     }
 
     @Override
     public Person update(Person person) {
-        session.execute("UPDATE persons SET name = "+ person.getName()+ " WHERE id ="+person.getId()+")");
+        session.execute("UPDATE persons SET name = ' "+ person.getName()+ " ' WHERE id =  '"+person.getId()+"' ;");
         return person;
     }
 
     @Override
     public boolean delete(Person person) {
-        session.execute("DELETE FROM persons where id = "+person.getId());
+        session.execute("DELETE FROM persons where id = '"+person.getId()+"'");
         return false;
     }
 
     @Override
     public Person read(String id) {
-        ResultSet results = session.execute("SELECT * FROM persons WHERE id = "+id);
+        ResultSet results = session.execute("SELECT * FROM persons WHERE id = ' "+id+" '");
         final Row row = results.one();
         Person person = new Person();
         person.setName(row.getString("name"));

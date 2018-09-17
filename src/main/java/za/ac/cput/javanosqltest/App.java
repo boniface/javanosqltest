@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import za.ac.cput.javanosqltest.domain.Result;
-import za.ac.cput.javanosqltest.services.cassandra.Impl.CassandraServiceImpl;
+import za.ac.cput.javanosqltest.services.cassandra.CassandraServiceImpl;
 import za.ac.cput.javanosqltest.services.mongo.Impl.MongoServiceImpl;
 import za.ac.cput.javanosqltest.services.redis.Impl.RedisServiceImpl;
 import za.ac.cput.javanosqltest.services.Service;
@@ -75,7 +75,7 @@ public class App {
         return service.delete();
     }
 
-    //Cassandra CRUD
+    // Cassandra CRUD
 
     @RequestMapping(value="/cassandra/create/{number}", method=RequestMethod.GET)
     public Result cassandraCreate(@PathVariable Long number) {
