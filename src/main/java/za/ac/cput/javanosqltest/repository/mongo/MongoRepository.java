@@ -53,7 +53,6 @@ public class MongoRepository implements Repository {
             person.setId(document.getString("_id"));
             person.setName(document.getString("name"));
             personList.add(person);
-
         }
         return personList;
     }
