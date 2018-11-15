@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import za.ac.cput.javanosqltest.domain.Result;
-import za.ac.cput.javanosqltest.services.cassandra.CassandraServiceImpl;
+import za.ac.cput.javanosqltest.services.Service;
+import za.ac.cput.javanosqltest.services.cassandra.Impl.CassandraServiceImpl;
+import za.ac.cput.javanosqltest.services.dgraph.DgraphServiceImpl;
 import za.ac.cput.javanosqltest.services.mongo.Impl.MongoServiceImpl;
 import za.ac.cput.javanosqltest.services.redis.Impl.RedisServiceImpl;
-import za.ac.cput.javanosqltest.services.Service;
 
 @SpringBootApplication
 @RestController
@@ -98,6 +99,33 @@ public class App {
     @RequestMapping(value="/cassandra/delete", method=RequestMethod.GET)
     public Result cassandraDelete() {
         service = new CassandraServiceImpl();
+        return service.delete();
+    }
+
+
+    // Dgraph CRUD
+
+    @RequestMapping(value="/dgraph/create/{number}", method=RequestMethod.GET)
+    public Result dgraphCreate(@PathVariable Long number) {
+        service = new DgraphServiceImpl();
+        return service.create(number);
+    }
+
+    @RequestMapping(value="/dgraph/read", method=RequestMethod.GET)
+    public Result dgraphRead() {
+        service = new DgraphServiceImpl();
+        return service.read();
+    }
+
+    @RequestMapping(value="/dgraph/update", method=RequestMethod.GET)
+    public Result dgraphUpdate() {
+        service = new DgraphServiceImpl();
+        return service.update();
+    }
+
+    @RequestMapping(value="/dgraph/delete", method=RequestMethod.GET)
+    public Result dgraphDelete() {
+        service = new DgraphServiceImpl();
         return service.delete();
     }
 
