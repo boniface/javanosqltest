@@ -14,7 +14,7 @@ public class RedisRepository implements Repository {
 
     public  Jedis getConnection(){
 
-        Jedis jedis = new Jedis("redis.r8s.svc.cluster.local");
+        Jedis jedis = new Jedis();
 
         return  jedis;
     }
@@ -30,7 +30,6 @@ public class RedisRepository implements Repository {
     @Override
     public Person update(Person person) {
         person.setName(person.getName());
-        getConnection().set(person.getId(),person.getName());
         getConnection().set(person.getId(),person.getName());
         return person;
 

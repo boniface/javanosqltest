@@ -16,7 +16,7 @@ public class DgraphConnection {
     private static DgraphConnection connection = null;
 
     private DgraphConnection() {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9080).usePlaintext(true).build();
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 6080).usePlaintext(true).build();
         DgraphGrpc.DgraphBlockingStub stub = DgraphGrpc.newBlockingStub(channel);
         List<DgraphGrpc.DgraphBlockingStub> stubs = new ArrayList<>();
         stubs.add(stub);

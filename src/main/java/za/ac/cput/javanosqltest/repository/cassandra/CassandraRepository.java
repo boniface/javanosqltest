@@ -15,7 +15,7 @@ public class CassandraRepository implements Repository {
 
     final Cluster cluster = Cluster
             .builder()
-            .addContactPoint("172.17.0.2")
+            .addContactPoint("127.0.0.1")
             .build();
     final Session session = cluster.connect("nosqltests");
     @Override
