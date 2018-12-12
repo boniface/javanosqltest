@@ -1,4 +1,4 @@
-package za.ac.cput.javanosqltest.services.dgraph;
+package za.ac.cput.javanosqltest.services.dgraph.Impl;
 
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.domain.Result;
@@ -58,7 +58,8 @@ public class DgraphServiceImpl implements Service {
     }
 
     @Override
-    public Result update() {
+    public Result update()
+    {
 
         long count = 0;
 

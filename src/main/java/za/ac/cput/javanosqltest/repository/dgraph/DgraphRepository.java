@@ -44,9 +44,9 @@ public class DgraphRepository implements Repository {
 
         DgraphClient.Transaction txn = client.newTransaction();
         try {
-            person.setName(person+ " Updated ");
             // Serialize it
             String json = gson.toJson(person);
+            person.setName(person+ " Updated ");
 
             // Run mutation
             DgraphProto.Mutation mu = DgraphProto
@@ -75,6 +75,8 @@ public class DgraphRepository implements Repository {
 
     @Override
     public List<Person> readAll() {
+
+
         return null;
     }
 }

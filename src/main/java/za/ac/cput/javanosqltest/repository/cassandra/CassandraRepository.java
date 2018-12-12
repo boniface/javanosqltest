@@ -13,10 +13,8 @@ import java.util.List;
 
 public class CassandraRepository implements Repository {
 
-    final Cluster cluster = Cluster
-            .builder()
-            .addContactPoint("127.0.0.1")
-            .build();
+    final Cluster cluster = Cluster.builder().addContactPoint("10.47.135.7").withPort(9042).build();
+
     final Session session = cluster.connect("nosqltests");
     @Override
     public Person create(Person person) {

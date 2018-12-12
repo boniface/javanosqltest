@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import za.ac.cput.javanosqltest.domain.Result;
 import za.ac.cput.javanosqltest.services.Service;
 import za.ac.cput.javanosqltest.services.cassandra.Impl.CassandraServiceImpl;
-import za.ac.cput.javanosqltest.services.dgraph.DgraphServiceImpl;
+import za.ac.cput.javanosqltest.services.dgraph.Impl.DgraphServiceImpl;
 import za.ac.cput.javanosqltest.services.mongo.Impl.MongoServiceImpl;
 import za.ac.cput.javanosqltest.services.redis.Impl.RedisServiceImpl;
 
