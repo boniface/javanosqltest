@@ -12,7 +12,9 @@ import java.util.List;
 import static java.sql.Timestamp.valueOf;
 
 public class DgraphServiceImpl implements Service {
-    private Repository repository = new DgraphRepository();
+
+
+    private Repository repository= new DgraphRepository();
 
     @Override
     public Result create(Long number) {
@@ -57,9 +59,9 @@ public class DgraphServiceImpl implements Service {
 
     }
 
+
     @Override
-    public Result update()
-    {
+    public Result update() {
 
         long count = 0;
 
@@ -83,8 +85,6 @@ public class DgraphServiceImpl implements Service {
         result.setDuration(end - start);
         return result;
     }
-
-
     @Override
     public Result delete() {
 

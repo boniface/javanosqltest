@@ -1,6 +1,5 @@
 package za.ac.cput.javanosqltest.repository.dgraph;
 
-import com.google.gson.Gson;
 import io.dgraph.DgraphClient;
 import io.dgraph.DgraphGrpc;
 import io.dgraph.DgraphProto;
@@ -16,7 +15,7 @@ public class DgraphConnection {
 
     private static DgraphConnection connection = null;
 
-    private DgraphConnection() {
+    public DgraphConnection() {
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9080).usePlaintext(true).build();
         DgraphGrpc.DgraphBlockingStub stub = DgraphGrpc.newBlockingStub(channel);
         List<DgraphGrpc.DgraphBlockingStub> stubs = new ArrayList<>();
@@ -28,7 +27,6 @@ public class DgraphConnection {
         dgraphClient.alter(op);
         client = dgraphClient;
 
-        Gson gson = new Gson(); // For JSON encode/decode
     }
 
     public static DgraphConnection getInstance() {
