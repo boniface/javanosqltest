@@ -1,4 +1,4 @@
-package za.ac.cput.javanosqltest.services.dgraph;
+package za.ac.cput.javanosqltest.services.dgraph.Impl;
 
 import za.ac.cput.javanosqltest.domain.Person;
 import za.ac.cput.javanosqltest.domain.Result;
@@ -12,7 +12,9 @@ import java.util.List;
 import static java.sql.Timestamp.valueOf;
 
 public class DgraphServiceImpl implements Service {
-    private Repository repository = new DgraphRepository();
+
+
+    private Repository repository= new DgraphRepository();
 
     @Override
     public Result create(Long number) {
@@ -57,6 +59,7 @@ public class DgraphServiceImpl implements Service {
 
     }
 
+
     @Override
     public Result update() {
 
@@ -82,8 +85,6 @@ public class DgraphServiceImpl implements Service {
         result.setDuration(end - start);
         return result;
     }
-
-
     @Override
     public Result delete() {
 
