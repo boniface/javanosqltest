@@ -1,11 +1,14 @@
 package za.ac.cput.javanosqltest.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Person implements Serializable {
     private String id;
     private String name;
+
+    public List<Person> all;
 
     public String getId() {
         return id;
