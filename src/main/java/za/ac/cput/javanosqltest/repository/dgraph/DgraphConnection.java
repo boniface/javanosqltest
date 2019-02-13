@@ -1,13 +1,11 @@
 package za.ac.cput.javanosqltest.repository.dgraph;
 
+
 import io.dgraph.DgraphClient;
 import io.dgraph.DgraphGrpc;
 import io.dgraph.DgraphProto;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DgraphConnection {
 
@@ -15,14 +13,17 @@ public class DgraphConnection {
 
     private static DgraphConnection connection = null;
 
+    private static final String HOSTNAME = "localhost";
+    private static final int PORT = 9080;
+
+
     public DgraphConnection() {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9080).usePlaintext(true).build();
-        DgraphGrpc.DgraphBlockingStub stub = DgraphGrpc.newBlockingStub(channel);
-        List<DgraphGrpc.DgraphBlockingStub> stubs = new ArrayList<>();
-        stubs.add(stub);
-        DgraphClient dgraphClient = new DgraphClient(stubs);
-        String schema = " id: string .\n" +
-                " name: string .\n";
+
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(HOSTNAME, PORT).usePlaintext(true).build();
+        DgraphGrpc.DgraphStub stub = DgraphGrpc.newStub(channel);
+        DgraphClient dgraphClient = new DgraphClient(stub);
+        String schema = " id: string @index(hash) .\n" +
+                " name: string @index(hash) .\n";
         DgraphProto.Operation op = DgraphProto.Operation.newBuilder().setSchema(schema).build();
         dgraphClient.alter(op);
         client = dgraphClient;

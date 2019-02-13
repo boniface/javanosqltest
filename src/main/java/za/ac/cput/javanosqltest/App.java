@@ -102,7 +102,6 @@ public class App {
         return service.delete();
     }
 
-
     // Dgraph CRUD
 
     @RequestMapping(value="/dgraph/create/{number}", method=RequestMethod.GET)
