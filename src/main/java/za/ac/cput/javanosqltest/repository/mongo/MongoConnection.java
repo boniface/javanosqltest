@@ -14,7 +14,7 @@ public class MongoConnection {
     private MongoCollection<Document> collection;
 
     private  MongoConnection() {
-        MongoClient client = new MongoClient("mongo.mongo", 27017);
+        MongoClient client = new MongoClient("10.233.102.164", 27017);
         collection = client.getDatabase("users").getCollection("person");
     }
 

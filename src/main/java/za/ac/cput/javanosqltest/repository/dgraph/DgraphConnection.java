@@ -13,7 +13,7 @@ public class DgraphConnection {
 
     private static DgraphConnection connection = null;
 
-    private static final String HOSTNAME = "dgraph-zero.dgraph";
+    private static final String HOSTNAME = "10.233.102.166";
     private static final int PORT = 5080;
 
 
