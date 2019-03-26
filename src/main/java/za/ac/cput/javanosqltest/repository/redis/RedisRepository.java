@@ -14,7 +14,7 @@ public class RedisRepository implements Repository {
 
     public  Jedis getConnection(){
 
-        Jedis jedis = new Jedis("155.238.46.32");
+        Jedis jedis = new Jedis("localhost");
 
         return  jedis;
     }

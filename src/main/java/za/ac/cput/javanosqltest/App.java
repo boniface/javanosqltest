@@ -20,7 +20,7 @@ public class App {
 
     @RequestMapping("/")
     public String home() {
-        return "Docker updated code!!! ";
+        return "Docker updated code works!!! ";
     }
 
     public static void main( String[] args ) {
