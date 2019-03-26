@@ -1,6 +1,7 @@
 package za.ac.cput.javanosqltest.repository.mongo;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
@@ -14,7 +15,9 @@ public class MongoConnection {
     private MongoCollection<Document> collection;
 
     private  MongoConnection() {
-        MongoClient client = new MongoClient("localhost", 27017);
+
+        MongoClient client = new MongoClient(new MongoClientURI("mongodb://10.233.102.164:27017"));
+
         collection = client.getDatabase("users").getCollection("person");
     }
 
