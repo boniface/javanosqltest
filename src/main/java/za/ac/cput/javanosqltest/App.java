@@ -20,9 +20,13 @@ public class App {
 
     @RequestMapping("/")
     public String home() {
-        return "Docker Issues now Fixed See Readme file ";
+        return "Docker updated code!!! ";
     }
 
+    public static void main( String[] args ) {
+        SpringApplication.run(za.ac.cput.javanosqltest.App.class, args);
+        System.out.println( "Hello World!" );
+    }
 
 //Redis CRUD
 
@@ -128,10 +132,4 @@ public class App {
         return service.delete();
     }
 
-
-
-
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    }
 }
