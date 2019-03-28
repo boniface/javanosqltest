@@ -17,7 +17,7 @@ public class MongoRepository implements Repository {
 
 
     private MongoCollection<Document> getConnection() {
-        MongoClient client = new MongoClient(new MongoClientURI("mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo,mongo-3.mongo:27017/users"));
+        MongoClient client = new MongoClient(new MongoClientURI("mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo,mongo-3.mongo:27017/?"));
         return client.getDatabase("users").getCollection("person");
 
     }
