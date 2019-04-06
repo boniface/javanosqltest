@@ -2,6 +2,8 @@ package za.ac.cput.javanosqltest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +15,8 @@ import za.ac.cput.javanosqltest.services.dgraph.Impl.DgraphServiceImpl;
 import za.ac.cput.javanosqltest.services.mongo.Impl.MongoServiceImpl;
 import za.ac.cput.javanosqltest.services.redis.Impl.RedisServiceImpl;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+
 @RestController
 public class App {
     private Service service;
