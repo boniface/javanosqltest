@@ -16,7 +16,7 @@ public class MongoConnection {
 
     public MongoConnection() {
 
-        MongoClient client = new MongoClient(new MongoClientURI("mongodb://mongo.mongo:27017/?"));
+        MongoClient client = new MongoClient(new MongoClientURI("mongodb://mongo.mongo:27017/"));
 
         collection = client.getDatabase("users").getCollection("person");
     }

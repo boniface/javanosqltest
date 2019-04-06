@@ -23,7 +23,7 @@ public class App {
 
     @RequestMapping("/")
     public String home() {
-        return "Docker updated code works???";
+        return "Docker updated code works, redis works...";
     }
 
     public static void main( String[] args ) {
