@@ -59,6 +59,12 @@
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-core</artifactId>
             <version>3.6.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.dropwizard.metrics</groupId>
+                    <artifactId>metrics-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -71,6 +77,12 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-jmx</artifactId>
+            <version>4.0.2</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
@@ -91,7 +103,7 @@
         <dependency>
             <groupId>io.dgraph</groupId>
             <artifactId>dgraph4j</artifactId>
-            <version>1.7.1</version>
+            <version>1.7.3</version>
         </dependency>
 
     </dependencies>
@@ -118,7 +130,7 @@
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>1.4.10</version>
                     <configuration>
-                        <!-- replace `bonifacekabaso` with your docker id-->
+                        <!-- replace `waldonhendricks` with your docker id-->
                         <repository>waldonhendricks/javanosqltest</repository>
                         <tag>${project.version}</tag>
                         <buildArgs>
